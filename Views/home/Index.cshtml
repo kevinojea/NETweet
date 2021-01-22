@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<NETUser> SignInManager
+@inject UserManager<NETUser> UserManager
+@model NETweet.Models.Tweet
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container row d-flex justify-content-center text-center" style="margin: auto; width: 360px;">
+    <div class="row">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+    <div class="row">
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <div class="row">
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+            <div class="container">
+                <div class="row">
+                    <p>¡Hola @User.Identity.Name!</p>
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        <form asp-controller="profile" asp-action="Index">
+                            <button type="submit">
+                                View profile
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container row d-flex justify-content-center text-center" style="margin: auto; width: 360px;">
+                <form asp-controller="Home" asp-action="CreateTweet">
+                    <div class="form-group">
+                        <label asp-for="Text"></label>
+                        <textarea asp-for="Text" class="form-control"></textarea>
+                        <span asp-validation-for="Text" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture"></label>
+                        <input asp-for="Picture" type="file" accept="image/*" class="form-control" />
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-info"></button>
+                </form>
+            </div>
+
+        }
+        else
+        {
+            <p>there's not user logged in ¯\_(ツ)_/¯</p>
+        }
+    </div>
+</div>
