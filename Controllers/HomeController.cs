@@ -32,7 +32,7 @@ namespace NETweet.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CreateTweet([Bind("Text,Picture")] Tweet tweet)
+        public async Task<IActionResult> CreateTweet([Bind("Text")] Tweet tweet)
         {
             if (ModelState.IsValid)
             {
