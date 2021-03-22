@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<NETUser> SignInManager
+@inject UserManager<NETUser> UserManager
+@{ 
+    var q = null as dynamic;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NETweet</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/post.css" />
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/search.css" />
+</head>
+<body>
+
+    <div class="mainDiv row justify-content-md-center">
+        <div class="izqCol col-auto">
+
+            <div class="row">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="btn btn-info btnLogout" style="margin: 15px;">Cerrar sesión</button>
+                    </form>
+                }
+                else
+                {
+                    <a class="list-group-item list-group-item-action" style="width: 114px; background-color:transparent;" asp-area="Identity" asp-page="/Account/Register">
+                        Registrarse
+                    </a>
+                    <a class="list-group-item list-group-item-action" style="width: 114px; background-color:transparent;" asp-area="Identity" asp-page="/Account/Login">
+                        Loguearse
+                    </a>
+                }
+            </div>
+
+            <div class="row list-group list-group-flush">
+                <a href="#" class="itemHome list-group-item list-group-item-action">
+                    <i class="fas fa-house-user"></i>
+                    <span class="textHome">Inicio</span>
+                </a>
+                <a href="#" class="itemNotif list-group-item list-group-item-action">
+                    <i class="fas fa-bell"></i>
+                    <span class="textNotif">Notificaciones</span>
+                </a>
+                <form asp-controller="search" asp-action="Index" >
+                    <div class="form-group list-group-item">
+                        <input asp-for="@q" type="text" class="form-control" id="formGroupExampleInput" placeholder="Buscar...">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="mainCol col-auto">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <div class="derCol col-auto">
+
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/fontawesome.js" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

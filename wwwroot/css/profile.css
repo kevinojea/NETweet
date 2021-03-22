@@ -1,0 +1,8 @@
+﻿.profile_leftCol {width: 45%;}
+    .profile_leftCol_body {padding: 6%; margin-inline: 0;}
+    .profile_leftCol_footer {padding-block: 4px; margin-inline: 0;}
+
+.profile_rightCol {width: 55%;}
+    .profile_leftCol_footer {padding-block: 3px;}
+
+.profile_pic {border-radius: 50%;}

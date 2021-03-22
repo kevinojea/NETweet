@@ -1,0 +1,9 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Busqueda";
+}
+
+@foreach (var user in Model.Users)
+{
+    <partial name="_User" model="user" />
+}

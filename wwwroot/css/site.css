@@ -1,0 +1,176 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  background-color: #0e8d6f;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/* RESPONSIVE
+-------------------------------------------------- */
+.mainDiv {
+    max-width: 1336px;
+    margin: auto;
+}
+
+.izqCol, .derCol {
+    height: 100vh;
+    border: 1px solid;
+}
+
+.izqCol {
+    width: 230px;
+}
+
+.mainCol {
+    width: 600px;
+}
+
+.derCol {
+    width: 316px;
+}
+
+@media only screen and (max-width: 1279px) {
+    .izqCol {
+        width: 70px;
+    }
+    .textHome, .textNotif {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1004px) {
+    .derCol {
+        width: 40px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .izqCol {
+        height: 50px;
+        width: 100vw;
+    }
+    .mainCol {
+        width: 100vw;
+    }
+    .derCol {
+        display: none;
+    }
+}
+
+/* IZQCOL
+-------------------------------------------------- */
+.itemHome, .itemNotif, itemLogout {
+    color: #212529;
+    background-color: transparent;
+    font-size: large;
+}
+
+.textHome, .textNotif {
+    margin-left: 10px;
+}
+
+.btnLogout {
+    margin-left: 15px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* MID COL
+-------------------------------------------------- */
+
+.topRow {
+    height: 45px;
+    padding: 10px;
+}
+
+
+.izqtCol {
+    width: 12%;
+}
+
+.dertCol {
+    width: 88%;
+}
+
+.textPubli {
+    width: 100%;
+}
+
+.rowtBody {
+    padding: 0.25rem;
+}
+
+.rowtFoot {
+    height: 40px;
+    padding: initial;
+    padding-top: 12px;
+}
+
+.coltFoot1 {
+    width: 83%;
+}

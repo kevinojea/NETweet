@@ -1,0 +1,9 @@
+﻿.user_leftCol {width: 12%; padding: 1%;}
+
+.user_midCol {width: 68%;}
+    .user_midCol_header {height: 28px; padding: 0; padding-left: 1%;}
+    .user_midCol_body {padding: 1%;}
+
+.user_rightCol {width: 20%; padding: 1%;}
+
+.user_pic {border-radius: 50%;}

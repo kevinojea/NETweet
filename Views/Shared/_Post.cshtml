@@ -1,0 +1,40 @@
+﻿@model NETweet.Models.Tweet
+
+<div class="row">
+
+    <div class="card card-columns bg-info post_leftCol">
+        <img class="card-img post_pic" src="~/pic.png" />
+    </div>
+
+    <div class="card bg-info col-auto post_rightCol">
+        <div class="card-header row post_rightCol_header">
+            <div class="col-auto row post_rightCol_header_col1">
+                <span class="font-weight-bold">@Model.NETUser.UserName</span>
+            </div>
+            <div class="col row post_rightCol_header_col2">
+                <span>@Model.Date.ToShortTimeString() · @Model.Date.ToLongDateString()</span>
+            </div>
+            <div class="col-auto align-self-end post_rightCol_header_col3">
+                <button class="btn post_btn">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body row post_rightCol_body">
+            <a style="overflow: auto;" class="card-text">@Model.Text</a>
+        </div>
+        <div class="card-footer row post_rightCol_footer">
+            <div class="col d-flex justify-content-center post_rightCol_footer_col1">
+                <button class="btn post_btn">
+                    <i class="far fa-heart fa-lg"></i> 
+                </button>
+            </div>
+            <div class="col d-flex justify-content-center post_rightCol_footer_col2">
+                <button class="btn post_btn">
+                    <i class="far fa-comment fa-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

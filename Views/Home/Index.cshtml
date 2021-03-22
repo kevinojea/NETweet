@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<NETUser> SignInManager
+@model List<NETweet.Models.Tweet>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="row topRow">
+        <h3 style="font-weight: bold; font-size: 20px;">Inicio</h3>
+        <span>@User.Identity.Name</span>
+    </div>
+    <partial name="_Publicar"/>
+    @foreach (var tweet in Model)
+    {
+        <partial name="_Post" model="tweet"/>
+    }
+}
+
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <p>No hay usuario logueado ¯\_(ツ)_/¯</p>
+    </div>
+}

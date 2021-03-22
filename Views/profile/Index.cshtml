@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<NETUser> SignInManager
+@model NETUser
+@{
+    ViewData["Title"] = User.Identity.Name;
+}
+
+<div class="row">
+
+    <div class="card card-columns bg-primary profile_leftCol">
+        <div class="row card-body profile_leftCol_body">
+            <img class="card-img profile_pic" src="~/pic.png" />
+        </div>
+        <div class="row card-footer d-flex justify-content-center profile_leftCol_footer">
+            <h4>@Model.UserName</h4>
+        </div>
+    </div>
+
+    <div class="card col-auto bg-primary profile_rightCol">
+        <div class="row card-header profile_rightCol_header">
+
+            <div class="col profile_rightCol_header_col1">
+                <div class="row d-flex justify-content-center profile_rightCol_header_col1_r1">
+                    <h5>Siguiendo</h5>
+                </div>
+                <div class="row d-flex justify-content-center profile_rightCol_header_col1_r2">
+                    <h5>@Model.Follower.Count</h5>
+                </div>
+            </div>
+
+            <div class="col profile_rightCol_header_col2">
+                <div class="row d-flex justify-content-center profile_rightCol_header_col2_r1">
+                    <h5>Seguidores</h5>
+                </div>
+                <div class="row d-flex justify-content-center profile_rightCol_header_col2_r2">
+                    <h5>@Model.Following.Count</h5>
+                </div>
+            </div>
+
+        </div>
+        <div class="row card-body profile_rightCol_body">
+
+        </div>
+        <div class="row card-footer d-flex justify-content-end profile_rightCol_footer">
+            <button class="btn">Editar perfil</button>
+        </div>
+    </div>
+
+</div>
+
+@foreach (var tweet in Model.Tweets)
+{
+    <partial name="_Post" model="tweet" />
+}

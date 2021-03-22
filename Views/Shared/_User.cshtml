@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model NETUser
+
+<div class="row">
+    <div class="card card-columns bg-primary user_leftCol">
+        <img class="card-img user_pic" src="~/pic.png" />
+    </div>
+
+    <div class="card col-auto bg-primary user_midCol">
+        <div class="row card-header user_midCol_header">
+            <span class="font-weight-bold">@Model.UserName</span>
+        </div>
+        <div class="row card-body user_midCol_body">
+            <span>@Model.Description</span>
+        </div>
+    </div>
+
+    <div class="card card-columns bg-primary user_rightCol">
+        @if (!Model.Following.Count.Equals(0))
+        {
+            <form asp-controller="search" asp-action="Unfollow">
+                <div class="form-group">
+                    <input asp-for="Id" type="hidden" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">Dejar de seguir</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            @if (!Model.UserName.Equals(User.Identity.Name))
+            {
+                <form asp-controller="search" asp-action="Follow">
+                    <div class="form-group">
+                        <input asp-for="Id" type="hidden" value="@Model.Id" />
+                        <button type="submit" class="btn btn-info">Seguir</button>
+                    </div>
+                </form>
+            }
+        }
+    </div>
+</div>
