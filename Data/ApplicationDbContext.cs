@@ -15,19 +15,20 @@ namespace NETweet.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Follow>()
                 .HasKey(k => new { k.FollowingId, k.FollowerId });
 
             modelBuilder.Entity<Follow>()
                 .HasOne(u => u.Following)
                 .WithMany(u => u.Follower)
-                .HasForeignKey(u => u.FollowerId)
+                .HasForeignKey(u => u.FollowingId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Follow>()
                 .HasOne(u => u.Follower)
                 .WithMany(u => u.Following)
-                .HasForeignKey(u => u.FollowingId)
+                .HasForeignKey(u => u.FollowerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<React>()

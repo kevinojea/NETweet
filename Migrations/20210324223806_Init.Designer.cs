@@ -10,7 +10,7 @@ using NETweet.Data;
 namespace NETweet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210321172734_Init")]
+    [Migration("20210324223806_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -342,14 +342,14 @@ namespace NETweet.Migrations
 
             modelBuilder.Entity("NETweet.Models.Follow", b =>
                 {
-                    b.HasOne("NETweet.Models.NETUser", "Following")
-                        .WithMany("Follower")
+                    b.HasOne("NETweet.Models.NETUser", "Follower")
+                        .WithMany("Following")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NETweet.Models.NETUser", "Follower")
-                        .WithMany("Following")
+                    b.HasOne("NETweet.Models.NETUser", "Following")
+                        .WithMany("Follower")
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

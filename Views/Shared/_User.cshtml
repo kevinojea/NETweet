@@ -1,14 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<NETUser> _userManager
 @model NETUser
+@{
+    var user = _userManager.GetUserId(User);
+}
 
 <div class="row">
     <div class="card card-columns bg-primary user_leftCol">
-        <img class="card-img user_pic" src="~/pic.png" />
+        <a asp-controller="profile" asp-action="Index" asp-route-u="@Model.UserName">
+            <img class="card-img user_pic" src="~/pic.png" />
+        </a>
     </div>
 
     <div class="card col-auto bg-primary user_midCol">
         <div class="row card-header user_midCol_header">
-            <span class="font-weight-bold">@Model.UserName</span>
+            <a asp-controller="profile" asp-action="Index" asp-route-u="@Model.UserName">
+                <span class="font-weight-bold text-black-50">@Model.UserName</span>
+            </a>
         </div>
         <div class="row card-body user_midCol_body">
             <span>@Model.Description</span>
@@ -16,18 +24,9 @@
     </div>
 
     <div class="card card-columns bg-primary user_rightCol">
-        @if (!Model.Following.Count.Equals(0))
+        @if (Model.Follower.Where(f => f.FollowerId.Equals(user)).Count().Equals(0))
         {
-            <form asp-controller="search" asp-action="Unfollow">
-                <div class="form-group">
-                    <input asp-for="Id" type="hidden" value="@Model.Id" />
-                    <button type="submit" class="btn btn-danger">Dejar de seguir</button>
-                </div>
-            </form>
-        }
-        else
-        {
-            @if (!Model.UserName.Equals(User.Identity.Name))
+            @if (!Model.Id.Equals(user))
             {
                 <form asp-controller="search" asp-action="Follow">
                     <div class="form-group">
@@ -36,6 +35,15 @@
                     </div>
                 </form>
             }
+        }
+        else
+        {
+            <form asp-controller="search" asp-action="Unfollow">
+                <div class="form-group">
+                    <input asp-for="Id" type="hidden" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">Dejar de seguir</button>
+                </div>
+            </form>
         }
     </div>
 </div>

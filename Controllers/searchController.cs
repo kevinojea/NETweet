@@ -25,36 +25,13 @@ namespace NETweet.Controllers
         {
             if (!String.IsNullOrEmpty(q))
             {
-                dynamic searchModel = new System.Dynamic.ExpandoObject();
-
                 var users = await _context.Users
-                    .Where(w => w.UserName
-                        .Contains(q))
-                    .Select(s => new NETUser
-                    {
-                        Id = s.Id,
-                        UserName = s.UserName,
-                        Following = _context.Follows
-                            .Where(f=>f.FollowingId.Equals(s.Id) &&
-                                      f.FollowerId.Equals(_userManager.GetUserId(User)))
-                            .ToList(),
-                        ConcurrencyStamp = null,
-                        SecurityStamp = null
-                    })
+                    .Where(u => u.UserName.Contains(q))
+                    .Include(i => i.Follower)
                     .ToListAsync();
-
-                searchModel.Users = users.ToList();
-                return View(searchModel);
+                return View(users);
             }
             return RedirectToAction("Index", "Home");
-        }
-
-        public async Task<IActionResult> GetFollow (string Id)
-        {
-            var follow = await _context.Follows
-                .FirstOrDefaultAsync(u => u.FollowerId.Equals(_userManager.GetUserId(User)) &&
-                                          u.FollowingId.Equals(Id));
-            return Json(follow);
         }
 
         public async Task<IActionResult> Follow(string Id)

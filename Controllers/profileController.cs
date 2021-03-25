@@ -39,15 +39,17 @@ namespace NETweet.Controllers
             {
                 user = await _userManager.FindByNameAsync(u);
             }
-            
-            var usermodel = await _context.Users
+
+            var userTweets = await _context.Users
                 .Where(f => f.Equals(user))
                 .Include(i => i.Following)
                 .Include(i => i.Follower)
+                .Include(i => i.Tweets.OrderByDescending(d=>d.Date))
+                    .ThenInclude(i=>i.Reacts)
                 .Include(i => i.Tweets)
                     .ThenInclude(i => i.NETUser)
                 .FirstOrDefaultAsync();
-            return View(usermodel);
+            return View(userTweets);
         }
     }
 }

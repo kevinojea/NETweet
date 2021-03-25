@@ -147,30 +147,3 @@ body {
     height: 45px;
     padding: 10px;
 }
-
-
-.izqtCol {
-    width: 12%;
-}
-
-.dertCol {
-    width: 88%;
-}
-
-.textPubli {
-    width: 100%;
-}
-
-.rowtBody {
-    padding: 0.25rem;
-}
-
-.rowtFoot {
-    height: 40px;
-    padding: initial;
-    padding-top: 12px;
-}
-
-.coltFoot1 {
-    width: 83%;
-}

@@ -340,14 +340,14 @@ namespace NETweet.Migrations
 
             modelBuilder.Entity("NETweet.Models.Follow", b =>
                 {
-                    b.HasOne("NETweet.Models.NETUser", "Following")
-                        .WithMany("Follower")
+                    b.HasOne("NETweet.Models.NETUser", "Follower")
+                        .WithMany("Following")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NETweet.Models.NETUser", "Follower")
-                        .WithMany("Following")
+                    b.HasOne("NETweet.Models.NETUser", "Following")
+                        .WithMany("Follower")
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/css/post.css" />
     <link rel="stylesheet" href="~/css/profile.css" />
     <link rel="stylesheet" href="~/css/search.css" />
+    <link rel="stylesheet" href="~/css/input.css" />
 </head>
 <body>
 
@@ -41,11 +42,11 @@
             </div>
 
             <div class="row list-group list-group-flush">
-                <a href="#" class="itemHome list-group-item list-group-item-action">
+                <a asp-controller="Home" asp-action="Index" class="itemHome list-group-item list-group-item-action">
                     <i class="fas fa-house-user"></i>
                     <span class="textHome">Inicio</span>
                 </a>
-                <a href="#" class="itemNotif list-group-item list-group-item-action">
+                <a class="itemNotif list-group-item list-group-item-action">
                     <i class="fas fa-bell"></i>
                     <span class="textNotif">Notificaciones</span>
                 </a>

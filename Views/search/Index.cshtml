@@ -1,9 +1,9 @@
-﻿@model dynamic
+﻿@model List<NETUser>
 @{
     ViewData["Title"] = "Busqueda";
 }
 
-@foreach (var user in Model.Users)
+@foreach (var user in Model)
 {
     <partial name="_User" model="user" />
 }

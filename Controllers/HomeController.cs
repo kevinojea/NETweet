@@ -27,21 +27,22 @@ namespace NETweet.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var follow = await _context.Follows
-                .Where(f => f.FollowerId.Equals(_userManager.GetUserId(User)))
-                .SelectMany(s => s.Follower.Tweets)
-                .Include(i => i.NETUser)
-                .ToListAsync();
-
-                var usertweets = await _context.Tweet
+                var userTweets = await _context.Tweet
                     .Where(t => t.UserRefID.Equals(_userManager.GetUserId(User)))
                     .Include(i => i.NETUser)
+                    .Include(r => r.Reacts)
                     .ToListAsync();
 
-                follow.AddRange(usertweets);
+                var followingTweets = await _context.Follows
+                    .Where(f => f.FollowerId.Equals(_userManager.GetUserId(User)))
+                    .SelectMany(s=>s.Following.Tweets)
+                    .Include(i=>i.Reacts)
+                    .Include(i=>i.NETUser)
+                    .ToListAsync();
 
-                follow = follow.OrderByDescending(d => d.Date).ToList();
-                return View(follow);
+                followingTweets.AddRange(userTweets);
+
+                return View(followingTweets.OrderByDescending(d=>d.Date).ToList());
             }
             return View();
         }
@@ -52,28 +53,11 @@ namespace NETweet.Controllers
             return View();
         }
 
-
-        public async Task<IActionResult> CreateTweet(string Text, int IsReply, int FromID)
+        public IActionResult Like()
         {
-            if (ModelState.IsValid)
-            {
-                int? fromID = (IsReply == 0) ? null : FromID;
 
-                Tweet tweet = new()
-                {
-                    Text = Text,
-                    IsReply = Convert.ToBoolean(IsReply),
-                    FromID = fromID,
-                    UserRefID = _userManager.GetUserId(User),
-                    Date = DateTime.Now,
-                };
-                _context.Add(tweet);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
