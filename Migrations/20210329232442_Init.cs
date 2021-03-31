@@ -207,14 +207,14 @@ namespace NETweet.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TweetRefID = table.Column<int>(type: "int", nullable: false)
+                    TweetID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_React", x => new { x.UserID, x.TweetRefID });
+                    table.PrimaryKey("PK_React", x => new { x.UserID, x.TweetID });
                     table.ForeignKey(
-                        name: "FK_React_Tweet_TweetRefID",
-                        column: x => x.TweetRefID,
+                        name: "FK_React_Tweet_TweetID",
+                        column: x => x.TweetID,
                         principalTable: "Tweet",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -265,9 +265,9 @@ namespace NETweet.Migrations
                 column: "FollowerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_React_TweetRefID",
+                name: "IX_React_TweetID",
                 table: "React",
-                column: "TweetRefID");
+                column: "TweetID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tweet_UserRefID",

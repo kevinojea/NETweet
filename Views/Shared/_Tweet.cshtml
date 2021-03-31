@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity 
 @inject UserManager<NETUser> _userManager
 @model NETweet.Models.Tweet
- @{ 
+@{
    var user = _userManager.GetUserId(User);
 }
 
@@ -40,28 +40,19 @@
         </div>
         <div class="card-footer row post_rightCol_footer">
             <div class="col d-flex justify-content-center post_rightCol_footer_col1">
-                    @if (Model.Reacts.Where(f => f.UserID.Equals(user)).Count().Equals(0))
-                    {
-                        <form asp-controller="tweet" asp-action="Like">
-                            <div class="form-group">
-                                <input type="hidden" asp-for="ID" value="@Model.ID" />
-                                <button type="submit" class="btn post_btn like_btn">
-                                    <i class="far fa-heart fa-lg"></i>
-                                </button>
-                            </div>
-                        </form>
-                    }
-                    else
-                    {
-                        <form asp-controller="tweet" asp-action="Dislike">
-                            <div class="form-group">
-                                <input type="hidden" asp-for="ID" value="@Model.ID" />
-                                <button type="submit" class="btn post_btn">
-                                    <i class="fas fa-heart fa-lg" style="color:indianred;"></i>
-                                </button>
-                            </div>
-                        </form>
-                    }
+                <input type="hidden" asp-for="ID" value="@Model.ID" class="tweetID" />
+                @if (Model.Reacts.Where(f => f.UserID.Equals(user)).Count().Equals(0))
+                {
+                    <button class="btn post_btn like_btn">
+                        <i class="far fa-heart fa-lg"></i>
+                    </button>
+                }
+                else
+                {
+                    <button class="btn post_btn dislike_btn">
+                        <i class="fas fa-heart fa-lg i_like"></i>
+                    </button>
+                }
             </div>
             <div class="col d-flex justify-content-center post_rightCol_footer_col2">
                 <button class="btn post_btn">

@@ -32,7 +32,13 @@ namespace NETweet.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<React>()
-                .HasKey(k => new { k.UserID, k.TweetRefID });
+                .HasKey(k => new { k.UserID, k.TweetID });
+            modelBuilder.Entity<React>()
+                .HasOne(k => k.Tweet)
+                .WithMany(k => k.Reacts)
+                .HasForeignKey(k => k.TweetID)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
         public DbSet<Follow> Follows { get; set; }

@@ -245,12 +245,12 @@ namespace NETweet.Migrations
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TweetRefID")
+                    b.Property<int>("TweetID")
                         .HasColumnType("int");
 
-                    b.HasKey("UserID", "TweetRefID");
+                    b.HasKey("UserID", "TweetID");
 
-                    b.HasIndex("TweetRefID");
+                    b.HasIndex("TweetID");
 
                     b.ToTable("React");
                 });
@@ -361,7 +361,7 @@ namespace NETweet.Migrations
                 {
                     b.HasOne("NETweet.Models.Tweet", "Tweet")
                         .WithMany("Reacts")
-                        .HasForeignKey("TweetRefID")
+                        .HasForeignKey("TweetID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

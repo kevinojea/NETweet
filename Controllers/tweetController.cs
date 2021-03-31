@@ -20,43 +20,43 @@ namespace NETweet.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Like(int ID)
+        public async Task<JsonResult> Like(int ID)
         {
             React react = new React
             {
                 UserID = _userManager.GetUserId(User),
-                TweetRefID = ID
+                TweetID = ID
             };
             _context.Add(react);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+            return Json(react);
         }
 
-        public async Task<IActionResult> Dislike(int ID)
+        public async Task<JsonResult> Dislike(int ID)
         {
             React react = await _context.React
-                .FirstOrDefaultAsync(t => t.TweetRefID.Equals(ID) && t.UserID.Equals(_userManager.GetUserId(User)));
+                .FirstOrDefaultAsync(t => t.TweetID.Equals(ID) && t.UserID.Equals(_userManager.GetUserId(User)));
             _context.Remove(react);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+            return Json(react);
         }
-        public async Task<IActionResult> CreateTweet(string Text, int IsReply, int FromID)
+
+        public async Task<IActionResult> CreateTweet(string Text)
         {
             if (ModelState.IsValid)
             {
-                int? fromID = (IsReply == 0) ? null : FromID;
-
                 Tweet tweet = new()
                 {
                     Text = Text,
-                    IsReply = Convert.ToBoolean(IsReply),
-                    FromID = fromID,
+                    //FromID = fromID,
                     UserRefID = _userManager.GetUserId(User),
                     Date = DateTime.Now,
+                    NETUser = await _userManager.FindByIdAsync(_userManager.GetUserId(User)),
+                    Reacts = new List<React>()
                 };
                 _context.Add(tweet);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return PartialView("_Tweet", tweet);
             }
             return View();
         }

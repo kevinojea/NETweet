@@ -9,10 +9,7 @@ namespace NETweet.Models
     public class React
     {
         public string UserID { get; set; }
-
-        [ForeignKey("Tweet")]
-        public int TweetRefID { get; set; }
-
+        public int TweetID { get; set; }
         public Tweet Tweet { get; set; }
     }
 }

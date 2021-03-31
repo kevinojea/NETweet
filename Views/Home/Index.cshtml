@@ -11,10 +11,12 @@
         <h3 style="font-weight: bold; font-size: 20px;">Inicio</h3>
     </div>
     <partial name="_Input" />
-    @foreach (var tweet in Model)
-    {
-        <partial name="_Tweet" model="tweet" />
-    }
+    <div id="Tweets">
+        @foreach (var tweet in Model)
+        {
+            <partial name="_Tweet" model="tweet" />
+        }
+    </div>
 }
 
 else

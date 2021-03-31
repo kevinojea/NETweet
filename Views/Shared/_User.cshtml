@@ -24,26 +24,17 @@
     </div>
 
     <div class="card card-columns bg-primary user_rightCol">
+        <input asp-for="Id" type="hidden" value="@Model.Id" />
         @if (Model.Follower.Where(f => f.FollowerId.Equals(user)).Count().Equals(0))
         {
             @if (!Model.Id.Equals(user))
             {
-                <form asp-controller="search" asp-action="Follow">
-                    <div class="form-group">
-                        <input asp-for="Id" type="hidden" value="@Model.Id" />
-                        <button type="submit" class="btn btn-info">Seguir</button>
-                    </div>
-                </form>
+                <button type="submit" class="btn btn-info follow_btn">Seguir</button>
             }
         }
         else
         {
-            <form asp-controller="search" asp-action="Unfollow">
-                <div class="form-group">
-                    <input asp-for="Id" type="hidden" value="@Model.Id" />
-                    <button type="submit" class="btn btn-danger">Dejar de seguir</button>
-                </div>
-            </form>
+            <button type="submit" class="btn btn-danger unfollow_btn">Dejar de seguir</button>
         }
     </div>
 </div>
