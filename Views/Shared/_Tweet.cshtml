@@ -5,7 +5,7 @@
    var user = _userManager.GetUserId(User);
 }
 
-<div class="row">
+<div class="row tweetRow">
 
     <div class="card card-columns bg-info post_leftCol">
         <a asp-controller="profile" asp-action="Index" asp-route-u="@Model.NETUser.UserName">
@@ -24,15 +24,15 @@
                 <span>@Model.Date.ToShortTimeString() · @Model.Date.ToLongDateString()</span>
             </div>
             <div class="col-auto align-self-end post_rightCol_header_col3">
+
                 @if (Model.UserRefID.Equals(user))
                 {
-                    <form asp-controller="tweet" asp-action="DeleteTweet">
-                        <input type="hidden" asp-for="ID" value="@Model.ID" />
-                        <button type="submit" class="btn">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </form>
+                    <input type="hidden" value="@Model.ID" class="tweetID"/>
+                    <button class="btn tweet_delete">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 }
+
             </div>
         </div>
         <div class="card-body row post_rightCol_body">
@@ -40,7 +40,7 @@
         </div>
         <div class="card-footer row post_rightCol_footer">
             <div class="col d-flex justify-content-center post_rightCol_footer_col1">
-                <input type="hidden" asp-for="ID" value="@Model.ID" class="tweetID" />
+                <input type="hidden" value="@Model.ID" class="tweetID" />
                 @if (Model.Reacts.Where(f => f.UserID.Equals(user)).Count().Equals(0))
                 {
                     <button class="btn post_btn like_btn">

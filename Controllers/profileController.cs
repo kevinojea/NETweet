@@ -51,5 +51,10 @@ namespace NETweet.Controllers
                 .FirstOrDefaultAsync();
             return View(userTweets);
         }
+
+        public IActionResult Edit()
+        {
+            return PartialView("_Edit");
+        }
     }
 }

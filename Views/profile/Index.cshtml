@@ -44,29 +44,20 @@
 
         </div>
         <div class="row card-footer d-flex justify-content-end profile_rightCol_footer">
+            <input type="hidden" value="@Model.Id" class="userID" />
             @if (Model.UserName.Equals(User.Identity.Name))
             {
-                <button class="btn">Editar perfil</button>
+                <button class="btn profile_edit" data-toggle="modal" data-target="#exampleModal" data-url="@Url.Action("Edit","profile")">Editar perfil</button>
             }
             else
             {
                 @if (Model.Follower.Where(f => f.FollowerId.Equals(user)).Count().Equals(0))
                 {
-                    <form asp-controller="search" asp-action="Follow">
-                        <div class="form-group">
-                            <input asp-for="Id" type="hidden" value="@Model.Id" />
-                            <button type="submit" class="btn btn-info">Seguir</button>
-                        </div>
-                    </form>
+                    <button class="btn btn-info follow_btn">Seguir</button>
                 }
                 else
                 {
-                    <form asp-controller="search" asp-action="Unfollow">
-                        <div class="form-group">
-                            <input asp-for="Id" type="hidden" value="@Model.Id" />
-                            <button type="submit" class="btn btn-danger">Dejar de seguir</button>
-                        </div>
-                    </form>
+                    <button class="btn btn-danger unfollow_btn">Dejar de seguir</button>
                 }
             }
 
@@ -75,7 +66,9 @@
 
 </div>
 
-@foreach (var tweet in Model.Tweets)
-{
-    <partial name="_Tweet" model="tweet" />
-}
+<div id="Tweets">
+    @foreach (var tweet in Model.Tweets)
+    {
+        <partial name="_Tweet" model="tweet" />
+    }
+</div>

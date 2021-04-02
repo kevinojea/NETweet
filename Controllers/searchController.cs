@@ -34,7 +34,7 @@ namespace NETweet.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Follow(string Id)
+        public async Task<JsonResult> Follow(string Id)
         {
             Follow follow = new Follow()
             {
@@ -43,17 +43,17 @@ namespace NETweet.Controllers
             };
             _context.Add(follow);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return Json(follow);
         }
 
-        public async Task<IActionResult> Unfollow (string Id)
+        public async Task<JsonResult> Unfollow (string Id)
         {
             var unfollow = await _context.Follows
                 .FirstOrDefaultAsync(u => u.FollowerId.Equals(_userManager.GetUserId(User)) &&
                                           u.FollowingId.Equals(Id));
             _context.Remove(unfollow);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return Json(unfollow);
         }
 
     }

@@ -61,14 +61,14 @@ namespace NETweet.Controllers
             return View();
         }
 
-        public async Task<IActionResult> DeleteTweet (int ID)
+        public async Task<JsonResult> DeleteTweet (int ID)
         {
             Tweet tweet = await _context.Tweet
                 .Include(i => i.Reacts)
                 .FirstOrDefaultAsync(t => t.ID.Equals(ID));
             _context.Remove(tweet);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+            return Json(tweet);
         }
     }
 }
